@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect
-#import main python code
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -19,13 +18,16 @@ def index():
         if file:
             fname = file.filename
 
-            # file is the input of the main source code
-            # Use function for the result
-            # result = Func(file)
+            # 위 아래 암거나 하면 됨
+            return redirect('/result')
+            # return redirect(url_for('resultPage'))
+            
 
-    #return render_template('index.html', fname=fname, result= result)
     return render_template('index.html', fname=fname)
 
+@app.route("/result")
+def resultPage():
+    return render_template('result.html')
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)
