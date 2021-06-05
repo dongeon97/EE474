@@ -10,6 +10,22 @@ titleContainer {
     margin: 20px;
 }
 
+#file-upload-button{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #4b4b4b;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+    color:#fff;
+    font-size: 20px;
+}
+
+#file-upload-input{
+    display: none;
+}
+
 #submitButton {
     background-color: #0191FE;
     color: white;
