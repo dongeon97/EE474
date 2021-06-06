@@ -18,7 +18,6 @@ def index():
         if file:
             fname = file.filename
 
-            # 위 아래 암거나 하면 됨
             return redirect('/result')
             # return redirect(url_for('resultPage'))
             
