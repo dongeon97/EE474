@@ -17,33 +17,43 @@
     </div>
 </header>
 <nav>
-    <div id="speechContainer">
 
-    	
-	<form method="post" enctype="multipart/form-data">
-	<div id="uploadContainer">
-		<h3> New File</h3>
-		<h4> 00 : 00 </h4>
-       		
-		<label for ="file-upload-input" id="file-upload-button">Upload</label>
-       		<input type="file" name="file" id="file-upload-input"/>
-	
-	</div>	
-        <div id="submitContainer">
-		<input type="submit" id="submitButton" value="Submit"/>
-	</div>
-    	</form>
-	
-    {% if fname != "" %}
-        <div id="speechTranscriptContainer">
-            <h1>.wav file</h1>
-            <p id="Filename">
-                Filename : {{ fname }}
-            </p>
-        </div>
-    {% endif %}
+    <div id="inputContainer">
+
+
+    <form method="post" enctype="multipart/form-data">
+    <div id="uploadContainer">
+        {% if fname == "" %}
+            <h3> New File</h3>
+            <h4> 00 : 00 </h4>
+        {% else %}
+            <h3> {{ fname }}</h3>
+            <h4> 00 : 0{{ duration }} </h4>
+
+        {% endif %}
+        <label for ="file-upload-input" id="file-upload-button">Upload</label>
+            <input type="file" name="file" id="file-upload-input"/>
+
     </div>
+        <div id="submitContainer">
+        <input type="submit" id="submitButton" value="Submit"/>
+        </div>
+    </form>
+    <div id="resultContainer">
+
+        {% if fname == "" %}
+            <h3>Your voice is similar to ...</h3>
+        {% else %}
+            <h3>Your voice is similar to {{celeb}}</h3>
+            <img src="{{ url_for('static', filename=image_file) }}">
+        {% endif %}
+    </div>
+
+    </div>
+
+
 </nav>
+
 
 
 </body>
