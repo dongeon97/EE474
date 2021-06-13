@@ -4,9 +4,10 @@
     <list default="true" id="7995c555-0cf6-4e77-af5c-1adad0d01b6e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EE474Project/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/EE474Project/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EE474Project/static/temp.css" beforeDir="false" afterPath="$PROJECT_DIR$/EE474Project/static/temp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EE474Project/static/audio/1.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EE474Project/static/images/임시완.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/EE474Project/static/images/임시완.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EE474Project/templates/temp.html" beforeDir="false" afterPath="$PROJECT_DIR$/EE474Project/templates/temp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$UI Templates.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EE474Project/test/1.wav" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

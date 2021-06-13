@@ -6,6 +6,12 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    celeblist = ["박명수", "임시완", "한예슬", "서현", "stevejobs", "meganfox", "dr.dre", "taylorswift" ]
+    oplist=[0, 0, 0, 0, 0, 0, 0, 0]
+    conlist=[0, 0, 0, 0, 0, 0, 0, 0]
+    exlist=[0, 0, 0, 0, 0, 0, 0, 0]
+    aglist=[0, 0, 0, 0, 0, 0, 0, 0]
+    nelist=[0, 0, 0, 0, 0, 0, 0, 0]
     fname = ""
     duration = ""
     celeb = ""
@@ -16,6 +22,7 @@ def index():
     exnum = 0
     agnum = 0
     nenum = 0
+    i = 0
     if request.method == "POST":
         print("FORM DATA RECEIVED")
 
@@ -44,6 +51,16 @@ def index():
             exnum=80
             agnum=30
             nenum=40
+           # for nn in celeblist:
+           #     if nn == celeb:
+           #         break
+           #     else:
+           #         i = i+1
+           # opnum = oplist[i]
+           # connum = conlist[i]
+           # exnum = exlist[[i]
+           # agnum = aglist[i]
+           # nenum = nelist[i]
 
             #return redirect('/')
             # return redirect(url_for('resultPage'))
