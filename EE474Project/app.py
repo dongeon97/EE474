@@ -11,6 +11,11 @@ def index():
     celeb = ""
     imgfname= ""
     audioname= ""
+    opnum = 0
+    connum = 0
+    exnum = 0
+    agnum = 0
+    nenum = 0
     if request.method == "POST":
         print("FORM DATA RECEIVED")
 
@@ -34,14 +39,18 @@ def index():
             audioname = "audio/" + fname
             celeb = find_celeb.find_celeb('./static/audio')
             imgfname = "images/"+celeb+".jpg"
-
+            opnum=50
+            connum=70
+            exnum=80
+            agnum=30
+            nenum=40
 
             #return redirect('/')
             # return redirect(url_for('resultPage'))
             
 
     #return render_template('index.html', fname=fname, duration=duration, celeb=celeb,image_file=imgfname)
-    return render_template('temp.html', fname=fname, duration=duration, celeb=celeb, image_file=imgfname, audio_file=audioname)
+    return render_template('temp.html', fname=fname, duration=duration, celeb=celeb, image_file=imgfname, audio_file=audioname, opnum=opnum, connum=connum, agnum=agnum, exnum=exnum, nenum=nenum)
 @app.route("/result")
 def resultPage():
     return render_template('result.html')

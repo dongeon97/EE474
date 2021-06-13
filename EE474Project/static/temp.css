@@ -36,24 +36,27 @@ body {
 }
  #contents{
     float:left;
-    width:40vw;
+    width:30vw;
     height:75vh;
     margin:0 auto;
     background-color:white;
+    box-sizing: border-box;
 }
  #side_right{
     float:left;
-    width:30vw;
+    width:40vw;
 
     height:75vh;
     background-color:white;
+    position:relative;
+    list-style: none;
 }
 #uploadContainer {
 	width: 300px;
 	height: 200px;
 	margin:0 auto;
 	position:relative;
-	top:100px;
+	top:200px;
 	padding:10px;
 	border:none;
 	border-radius: 25px;
@@ -62,7 +65,7 @@ body {
 }
 #audioContainer {
     position:relative;
-    top:100px;
+    top:80px;
 }
 
 #file-upload-button{
@@ -72,7 +75,7 @@ body {
     background-color: lightgray;
     border: none;
     position:relative;
-    top:100px;
+    top:80px;
     padding: 10px 30px;
     cursor: pointer;
     color:white;
@@ -88,7 +91,7 @@ body {
    height: 100px;
    margin:0 auto;
    position:relative;
-   top: 100px;
+   top: 200px;
 }
 
 #submitButton {
@@ -102,4 +105,102 @@ body {
 
 #submitButton:hover {
     cursor: pointer;
+}
+
+#resultContainer{
+    padding-top: 70px;
+
+}
+#imgContainer{
+    padding-top: 50px;
+
+}
+
+.progress {
+    background-color: white;
+    width: 500px;
+    margin:60px auto;
+}
+
+.progress li{
+    margin : 40px 0;
+
+}
+
+.bar{
+    background:gray;
+    display: block;
+    width:
+    height: 10px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.bar span{
+    height: 10px;
+    float: left;
+    background:black;
+}
+
+.openness{
+    border-radius: 8px;
+    animation: openness 2s;
+}
+.conscientiousness{
+    border-radius: 8px;
+    animation: conscientiousness 2s;
+}
+.extraversion{
+    border-radius: 8px;
+    animation: extraversion 2s;
+}
+.agreeableness{
+    border-radius: 8px;
+    animation: agreeableness 2s;
+}
+.neuroticism{
+    border-radius: 8px;
+    animation: neuroticism 2s;
+}
+
+@keyframes openness {
+    0%{
+        width:0%;
+    }
+    100%{
+        width:{{opnum}}%;
+    }
+}
+
+@keyframes conscientiousness {
+    0%{
+        width:0%;
+    }
+    100%{
+        width:{{connum}}%;
+    }
+}
+@keyframes extraversion {
+    0%{
+        width:0%;
+    }
+    100%{
+        width:{{exnum}}%;
+    }
+}
+@keyframes agreeableness {
+    0%{
+        width:0%;
+    }
+    100%{
+        width:{{agnum}}%;
+    }
+}
+@keyframes neuroticism {
+    0%{
+        width:0%;
+    }
+    100%{
+        width:{{nenum}}%;
+    }
 }
