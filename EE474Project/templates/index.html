@@ -5,56 +5,105 @@
     <title>EE474 Term Project </title>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
-    <style>
-    </style>
 
 </head>
 <body >
-<header>
-    <div id="titleContainer">
-        <h2 > EE474 Term Project (TEAM 4)</h2>
-        <h2 > What's your personality ? </h2>
-    </div>
-</header>
-<nav>
-
-    <div id="inputContainer">
-
-
-    <form method="post" enctype="multipart/form-data">
-    <div id="uploadContainer">
-        {% if fname == "" %}
-            <h3> New File</h3>
-            <h4> 00 : 00 </h4>
-        {% else %}
-            <h3> {{ fname }}</h3>
-            <h4> 00 : 0{{ duration }} </h4>
-
-        {% endif %}
-        <label for ="file-upload-input" id="file-upload-button">Upload</label>
-            <input type="file" name="file" id="file-upload-input"/>
-
-    </div>
-        <div id="submitContainer">
-        <input type="submit" id="submitButton" value="Submit"/>
+    <div id="wrap">
+        <div id="header">
+            <h2 >EE474 Term Project (TEAM 4)</h2>
+            <h2 >What's your personality ? </h2>
         </div>
-    </form>
-    <div id="resultContainer">
+        <div id="side_left">
+            <form method="post" enctype="multipart/form-data">
+                <div id="uploadContainer">
+                    {% if fname == "" %}
+                        <h3> New File</h3>
+                        <br>
+                        <h4> 00 : 00 </h4>
+                    {% else %}
+                        <h3> {{ fname }}</h3>
+                        <br>
+                        <h4> 00 : 0{{ duration }} </h4>
+                    {% endif %}
+                    {% if fname == "" %}
+                        <label for ="file-upload-input" id="file-upload-button">Upload</label>
+                        <input type="file" name="file" id="file-upload-input" />
+                    {% else %}
+                        <div id="audioContainer">
+                            <audio controls>
+                                    <source src="{{ url_for('static', filename=audio_file) }}" type="audio/wav">
+                            </audio>
+                        </div>
+                    {% endif %}
 
-        {% if fname == "" %}
-            <h3>Your voice is similar to ...</h3>
-        {% else %}
-            <h3>Your voice is similar to {{celeb}}</h3>
-            <img src="{{ url_for('static', filename=image_file) }}">
-        {% endif %}
+                </div>
+                <div id="submitContainer">
+                    <input type="submit" id="submitButton" value="Submit"/>
+                </div>
+            </form>
+        </div>
+        <div id="contents">
+            <div id="resultContainer">
+                {% if celeb == "" %}
+                    <h3>Your voice is similar to ...</h3>
+                    <div id="imgContainer">
+                        <img src="{{ url_for('static', filename='images/0.png') }}" width="300" height="300">
+                    </div>
+                {% else %}
+                    <h2>Your voice is similar {{accstr}}% to {{celeb}}</h2>
+                    <div id="imgContainer">
+                        <img src="{{ url_for('static', filename=image_file) }}" width="300" height="300">
+                    </div>
+                    <div id="wordContainer">
+                        <h2>"{{word1}}"</h2>
+                    </div>
+                    <div id="wordContainer">
+                        <h2>{{word2}}</h2>
+                    </div>
+                    <div id="wordContainer">
+                        <h2>{{word3}}</h2>
+                    </div>
+
+
+                {% endif %}
+            </div>
+        </div>
+        <div id="side_right">
+            <div class="progress">
+                <h2>5 Personality types</h2>
+                <li>
+                    <h3>Openness</h3>
+                        <div style="float:left"><h4>closed</h4></div>
+                        <div style="float:right"><h4>open</h4></div>
+
+                    <span style="clear:both" class="bar"><span class="openness" style="width:{{opnum}}%"></span></span>
+                </li>
+                 <li>
+                    <h3>Conscientiousness</h3>
+                     <div style="float:left"><h4>spontaneous</h4></div>
+                        <div style="float:right"><h4>conscientious</h4></div>
+                     <span style="clear:both" class="bar"><span class="conscientiousness" style="width:{{connum}}%"></span></span>
+                </li>
+                 <li>
+                    <h3>Extraversion</h3>
+                     <div style="float:left"><h4>introverted</h4></div>
+                        <div style="float:right"><h4>extraverted</h4></div>
+                     <span style="clear:both" class="bar"><span class="extraversion" style="width:{{exnum}}%"></span></span>
+                </li>
+                 <li>
+                    <h3>Agreeableness</h3>
+                     <div style="float:left"><h4>hostile</h4></div>
+                        <div style="float:right"><h4>agreeable</h4></div>
+                     <span style="clear:both" class="bar"><span class="agreeableness" style="width:{{agnum}}%"></span></span>
+                </li>
+                 <li>
+                    <h3>Neuroticism</h3>
+                     <div style="float:left"><h4>neurotic</h4></div>
+                        <div style="float:right"><h4>stable</h4></div>
+                     <span style="clear:both" class="bar"><span class="neuroticism" style="width:{{nenum}}%"></span></span>
+                </li>
+            </div>
+        </div>
     </div>
-
-    </div>
-
-
-</nav>
-
-
-
 </body>
 </html>

@@ -18,6 +18,10 @@ from keras import Input
 #from keras.utils import to_categorical
 #from keras.layers import *
 from keras.models import load_model
+import tensorflow as tf
+from tensorflow import keras
+
+
 
 pad2d = lambda a, i: a[:, 0:i] if a.shape[1] > i else np.hstack((a, np.zeros((a.shape[0], i-a.shape[1]))))
 
@@ -46,33 +50,42 @@ def load_file(path):
 def find_celeb(sample_path):
     path = sample_path
     input_data = load_file(path)
-    
-    model = load_model('./500epoch_7valset')
+    result = []
+    model = load_model('./0603-1_20_1000(75%)')
+    model.load_weights('./0603-1_20_1000(75%)/103-- 0.7500.hdf5')
+    tot = 0
     
     model.summary()
     output_ = model.predict(input_data)
     predict = np.argmax(output_)
-    print(output_)
-    print(predict)
+    for i in range(len(output_[0])):
+        tot += output_[:, i]
+        
+    acc = output_[:, predict]/tot * 100
+    ## print(output_)
+    ##print(predict)
+    ##print(tot)
+    ##print(output_[:, predict])
     if (predict == 0):
-        celeb = '박명수'
+        celeb = 'Dr.dre'
     elif (predict == 1):
-        celeb = '보아'
+        celeb = 'Megan Fox'
     elif (predict == 2):
-        celeb = '서현'
+        celeb = '박명수'
     elif (predict == 3):
-        celeb = '엘'
+        celeb = '서현'
     elif (predict == 4):
-        celeb = '이효리'
+        celeb = 'Steve Jobs'
     elif (predict == 5):
-        celeb = '임시완'
+        celeb = '임시완' 
     elif (predict == 6):
-        celeb = '전현무'
+        celeb = 'Taylor Swift'
     else:
         celeb = '한예슬'
-        
+    result.append(celeb)
+    result.append(acc)
     print(celeb)
-
-    return celeb
+    print(acc)
+    return result
 
 #find_celeb('./test')

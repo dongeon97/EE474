@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EE474 Term Project </title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+    <style>
+    </style>
+
+</head>
+<body >
+<header>
+    <div id="titleContainer">
+        <h2 > EE474 Term Project (TEAM 4)</h2>
+        <h2 > What's your personality ? </h2>
+    </div>
+</header>
+<nav>
+
+    <div id="inputContainer">
+
+
+    <form method="post" enctype="multipart/form-data">
+    <div id="uploadContainer">
+        {% if fname == "" %}
+            <h3> New File</h3>
+            <h4> 00 : 00 </h4>
+        {% else %}
+            <h3> {{ fname }}</h3>
+            <h4> 00 : 0{{ duration }} </h4>
+
+        {% endif %}
+        <label for ="file-upload-input" id="file-upload-button">Upload</label>
+            <input type="file" name="file" id="file-upload-input"/>
+
+    </div>
+        <div id="submitContainer">
+        <input type="submit" id="submitButton" value="Submit"/>
+        </div>
+    </form>
+    <div id="resultContainer">
+
+        {% if fname == "" %}
+            <h3>Your voice is similar to ...</h3>
+        {% else %}
+            <h3>Your voice is similar to {{celeb}}</h3>
+            <img src="{{ url_for('static', filename=image_file) }}">
+        {% endif %}
+    </div>
+
+    </div>
+
+
+</nav>
+
+
+
+</body>
+</html>

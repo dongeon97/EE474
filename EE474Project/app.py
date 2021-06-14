@@ -2,26 +2,35 @@ from flask import Flask, render_template, request, redirect, url_for
 import wave
 import contextlib
 import find_celeb
+import numpy as np
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    celeblist = ["박명수", "임시완", "한예슬", "서현", "stevejobs", "meganfox", "dr.dre", "taylorswift" ]
-    oplist=[0, 0, 0, 0, 0, 0, 0, 0]
-    conlist=[0, 0, 0, 0, 0, 0, 0, 0]
-    exlist=[0, 0, 0, 0, 0, 0, 0, 0]
-    aglist=[0, 0, 0, 0, 0, 0, 0, 0]
-    nelist=[0, 0, 0, 0, 0, 0, 0, 0]
+    celeblist = ["박명수", "임시완", "한예슬", "서현", "Steve Jobs", "Megan Fox", "Dr.dre", "Taylor Swift" ]
+    oplist = [20, 60, 90, 80, 100, 30, 80, 60]
+    conlist = [50, 50, 35, 80, 80, 50, 40, 80]
+    exlist = [30, 70, 80, 60, 60, 20, 60, 70]
+    aglist = [40, 80, 40, 50, 50, 40, 50, 90]
+    nelist = [30, 20, 80, 70, 70, 20, 70, 20]
+    wordlist1 =["ISTP", "ENFJ", "ENTP", "ENTJ", "ENTJ", "ISTP", "ENTP", "ENFJ"]
+    wordlist2 = ["", "", "", "", "", "", "", ""]
+    wordlist3 = ["", "", "", "", "", "", "", ""]
     fname = ""
     duration = ""
     celeb = ""
     imgfname= ""
     audioname= ""
+    acc = 0
+    accstr = ""
     opnum = 0
     connum = 0
     exnum = 0
     agnum = 0
     nenum = 0
+    word1 = ""
+    word2 = ""
+    word3 = ""
     i = 0
     if request.method == "POST":
         print("FORM DATA RECEIVED")
@@ -44,30 +53,29 @@ def index():
                 duration = round(duration)
 
             audioname = "audio/" + fname
-            celeb = find_celeb.find_celeb('./static/audio')
+            result = find_celeb.find_celeb('./static/audio')
+            celeb = result[0]
+            acc = result[1]
+            acc = np.round(acc, 2)
+            accstr = str(acc)[1:-1]
             imgfname = "images/"+celeb+".jpg"
-            opnum=50
-            connum=70
-            exnum=80
-            agnum=30
-            nenum=40
-           # for nn in celeblist:
-           #     if nn == celeb:
-           #         break
-           #     else:
-           #         i = i+1
-           # opnum = oplist[i]
-           # connum = conlist[i]
-           # exnum = exlist[[i]
-           # agnum = aglist[i]
-           # nenum = nelist[i]
 
-            #return redirect('/')
-            # return redirect(url_for('resultPage'))
-            
+            for nn in celeblist:
+                if nn == celeb:
+                    break
+                else:
+                    i = i+1
+            opnum = oplist[i]
+            connum = conlist[i]
+            exnum = exlist[i]
+            agnum = aglist[i]
+            nenum = nelist[i]
+            word1 = wordlist1[i]
+            word2 = wordlist2[i]
+            word3 = wordlist3[i]
 
-    #return render_template('index.html', fname=fname, duration=duration, celeb=celeb,image_file=imgfname)
-    return render_template('temp.html', fname=fname, duration=duration, celeb=celeb, image_file=imgfname, audio_file=audioname, opnum=opnum, connum=connum, agnum=agnum, exnum=exnum, nenum=nenum)
+
+    return render_template('index.html', fname=fname, duration=duration, celeb=celeb, accstr=accstr, image_file=imgfname, audio_file=audioname, word1=word1, word2=word2, word3=word3, opnum=opnum, connum=connum, agnum=agnum, exnum=exnum, nenum=nenum)
 @app.route("/result")
 def resultPage():
     return render_template('result.html')
