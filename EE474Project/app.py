@@ -40,13 +40,25 @@ def index():
 
         if submitFile :
             print("submit is true")
-            celeb = find_celeb.find_celeb('./static/audio')
+            result = find_celeb.find_celeb('./static/audio')
+            celeb = result[0]
+            acc = result[1]
+            acc = np.round(acc, 2)
+            accstr = str(acc)[1:-1]
             imgfname = "images/"+celeb+".jpg"
-            opnum=50
-            connum=70
-            exnum=80
-            agnum=30
-            nenum=40
+            for nn in celeblist:
+                if nn == celeb:
+                    break
+                else:
+                    i = i + 1
+            opnum = oplist[i]
+            connum = conlist[i]
+            exnum = exlist[i]
+            agnum = aglist[i]
+            nenum = nelist[i]
+            word1 = wordlist1[i]
+            word2 = wordlist2[i]
+            word3 = wordlist3[i]
             file = submitFile
             shouldResetSubmitFile = True
         else : 
@@ -69,26 +81,7 @@ def index():
                 duration = round(duration)
 
             audioname = "audio/" + fname
-            result = find_celeb.find_celeb('./static/audio')
-            celeb = result[0]
-            acc = result[1]
-            acc = np.round(acc, 2)
-            accstr = str(acc)[1:-1]
-            imgfname = "images/"+celeb+".jpg"
-
-            for nn in celeblist:
-                if nn == celeb:
-                    break
-                else:
-                    i = i+1
-            opnum = oplist[i]
-            connum = conlist[i]
-            exnum = exlist[i]
-            agnum = aglist[i]
-            nenum = nelist[i]
-            word1 = wordlist1[i]
-            word2 = wordlist2[i]
-            word3 = wordlist3[i]
+            #result = find_celeb.find_celeb('./static/audio')
 
             if shouldResetSubmitFile :
                 submitFile = None
