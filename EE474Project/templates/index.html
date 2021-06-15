@@ -27,7 +27,7 @@
                     {% endif %}
                     {% if fname == "" %}
                         <label for ="file-upload-input" id="file-upload-button">Upload</label>
-                        <input type="file" name="file" id="file-upload-input" />
+                        <input type="file" name="file" id="file-upload-input" onchange="form.submit()"/>
                     {% else %}
                         <div id="audioContainer">
                             <audio controls>
@@ -37,6 +37,8 @@
                     {% endif %}
 
                 </div>
+            </form>
+            <form method="POST">
                 <div id="submitContainer">
                     <input type="submit" id="submitButton" value="Submit"/>
                 </div>
