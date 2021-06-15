@@ -4,9 +4,12 @@ import contextlib
 import find_celeb
 import numpy as np
 app = Flask(__name__)
+submitFile = None
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    global submitFile
+    shouldResetSubmitFile = False
     celeblist = ["박명수", "임시완", "한예슬", "서현", "Steve Jobs", "Megan Fox", "Dr.dre", "Taylor Swift" ]
     oplist = [20, 60, 90, 80, 100, 30, 80, 60]
     conlist = [50, 50, 35, 80, 80, 50, 40, 80]
@@ -35,15 +38,28 @@ def index():
     if request.method == "POST":
         print("FORM DATA RECEIVED")
 
-        if "file" not in request.files:
-            return redirect(request.url)
+        if submitFile :
+            print("submit is true")
+            celeb = find_celeb.find_celeb('./static/audio')
+            imgfname = "images/"+celeb+".jpg"
+            opnum=50
+            connum=70
+            exnum=80
+            agnum=30
+            nenum=40
+            file = submitFile
+            shouldResetSubmitFile = True
+        else : 
+            if "file" not in request.files:
+                return redirect(request.url)
 
-        file = request.files["file"]
+            file = request.files["file"]
+
         if file.filename == "":
             return redirect(request.url)
 
-        if file:
-
+        if file :
+            submitFile = file
             fname = file.filename
             fullfname="./static/audio/"+fname
             with contextlib.closing(wave.open(fullfname, 'r')) as f:
@@ -73,6 +89,9 @@ def index():
             word1 = wordlist1[i]
             word2 = wordlist2[i]
             word3 = wordlist3[i]
+
+            if shouldResetSubmitFile :
+                submitFile = None
 
 
     return render_template('index.html', fname=fname, duration=duration, celeb=celeb, accstr=accstr, image_file=imgfname, audio_file=audioname, word1=word1, word2=word2, word3=word3, opnum=opnum, connum=connum, agnum=agnum, exnum=exnum, nenum=nenum)
